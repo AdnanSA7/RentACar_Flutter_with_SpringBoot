@@ -1,29 +1,20 @@
 import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:project_practice/bottom_navigationbar.dart';
-import 'package:project_practice/colors.dart';
-
-void main() {
-   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: AppColors.secondary,
-    ));
-  runApp(const MyApp());
-}
+import 'package:project_practice/home.dart';
+import 'package:project_practice/login.dart';
+import 'package:project_practice/registration.dart';
 
 // void main() {
-//   SystemChrome.setSystemUIOverlayStyle(
-//     SystemUiOverlayStyle(
-//       statusBarColor: AppColors.secondary,
-//     ));
-//   runApp(
-//       DevicePreview(
-//         enabled: !kReleaseMode,
-//         builder: (context) => MyApp() // Wrap your app
-//       ));
+//   runApp(const MyApp());
 // }
+void main() => runApp(
+  DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => MyApp(), // Wrap your app
+  ),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -48,7 +39,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const BottomNavbar(),
+      initialRoute: '/login', // Initial route of the app
+      routes: {
+        '/login': (context) => const LoginPage(), // Define the login page
+        '/home': (context) => const BottomNavbar(), // Define the home page
+        '/register': (context) => const RegistrationPage(), // Define the sign up page
+      },
+      // home: const LoginPage(),
     );
   }
 }

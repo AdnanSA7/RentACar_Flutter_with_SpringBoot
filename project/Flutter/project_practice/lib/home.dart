@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_practice/CarCards.dart';
 import 'package:project_practice/cars_slider.dart';
 import 'package:project_practice/colors.dart';
-import 'package:project_practice/custom_app_bar.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -15,14 +15,15 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
   int _selectedCategory = 0;
-  final _categories = ["Sedan", "SUV", "All","Sedan", "SUV", "All","Sedan", "SUV", "All"];
+  final _categories = ["Sedan", "SUV", "All", "Sedan", "SUV", "All", "Sedan", "SUV", "All"];
+
+  final ScrollController _listViewController = ScrollController(); // Add this controller
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F9FA),
-      // appBar:
-      // GradientAppBar(
+      // appBar: GradientAppBar(
       //     title: "Rent A Car",
       //     gradient: LinearGradient(
       //       colors: [AppColors.primary, AppColors.secondary],
@@ -36,19 +37,20 @@ class _HomePageState extends State<HomePage> {
       // ),
       // AppBar(
       //   backgroundColor: Colors.transparent,
-      //   bottomOpacity: 0,
-      //   elevation: 0,
       //   title: Text("Rent A Car"),
       // ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            // expandedHeight: 185,
+            toolbarHeight: 180,
+            pinned: true,
+            floating: false,
+            flexibleSpace: FlexibleSpaceBar(
+              background:
               // Header
               Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 20),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Color(0xFF2C3E50), Color(0xFFE74C3C)],
@@ -129,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                                 hintStyle: TextStyle(color: Color(0xFF95A5A6)),
                                 border: InputBorder.none,
                                 contentPadding:
-                                    EdgeInsets.symmetric(vertical: 15),
+                                EdgeInsets.symmetric(vertical: 15),
                               ),
                             ),
                           ),
@@ -151,80 +153,96 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              //   Categories
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 30),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Categories",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textDark,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //   Categories
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 30),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Categories",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textDark,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 15),
-                        SizedBox(
-                          height: 45,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: _categories.length,
-                            itemBuilder: (context, index) {
-                              final isSelected = _selectedCategory == index;
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _selectedCategory = index;
-                                  });
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  padding: EdgeInsets.symmetric(horizontal: 25),
-                                  decoration: BoxDecoration(
-                                    color: isSelected ? AppColors.secondary : AppColors.cardBg,
-                                    borderRadius: BorderRadius.circular(25),
-                                    boxShadow: [
-                                      if(isSelected)
-                                        BoxShadow(
-                                          color: AppColors.secondary.withOpacity(0.3),
-                                          blurRadius: 10,
-                                          offset: Offset(0, 5)
-                                        )
-                                    ]
-                                  ),
-                                  child: Center(
-                                    child: Text(_categories[index],
-                                      style: TextStyle(
-                                        color: isSelected ? Colors.white : AppColors.textLight,
-                                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          SizedBox(height: 15),
+                          SizedBox(
+                            height: 45,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: _categories.length,
+                                itemBuilder: (context, index) {
+                                  final isSelected = _selectedCategory == index;
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _selectedCategory = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      padding: EdgeInsets.symmetric(horizontal: 25),
+                                      decoration: BoxDecoration(
+                                          color: isSelected ? AppColors.secondary : AppColors.cardBg,
+                                          borderRadius: BorderRadius.circular(25),
+                                          boxShadow: [
+                                            if(isSelected)
+                                              BoxShadow(
+                                                  color: AppColors.secondary.withOpacity(0.3),
+                                                  blurRadius: 10,
+                                                  offset: Offset(0, 5)
+                                              )
+                                          ]
+                                      ),
+                                      child: Center(
+                                        child: Text(_categories[index],
+                                          style: TextStyle(
+                                            color: isSelected ? Colors.white : AppColors.textLight,
+                                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            }
-                          ),
-                        )
-                      ],
-                    )
+                                  );
+                                }
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  height: 200,
+                  alignment: Alignment.center,
+                  child: CarsSlider(),
+                ),
+                ListView(
+                  primary: false,
+                  controller: _listViewController,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(), // Prevent nested scrolling
+                  children: [
+                    CarCards(), // CarCards now fits dynamically without overflow
                   ],
                 ),
-              ),
-              SizedBox(height: 15),
-              Container(
-                height: 200,
-                alignment: Alignment.center,
-                child: CarsSlider(),
-              )
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -37,7 +37,10 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   device_preview_plus: ^2.2.2
   carousel_slider:
-  banner_carousel:
+  parallax_cards:
+  http:
+  shared_preferences:
+  multi_select_flutter:
 
 dev_dependencies:
   flutter_test:

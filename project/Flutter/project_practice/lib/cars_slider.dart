@@ -54,7 +54,7 @@ class _CarsSliderState extends State<CarsSlider> {
                 ));
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 1),
+                margin: EdgeInsets.symmetric(horizontal: 5),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Stack(
