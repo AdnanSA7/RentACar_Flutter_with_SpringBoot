@@ -35,8 +35,9 @@ public class UsersService {
         return usersRepo.save(users);
     }
 
-    public Users findById(long id) {
-        return usersRepo.findById(id).get();
+    public UserDto findById(long id) {
+        Users user = usersRepo.findById(id).get();
+        return modelMapper.map(user, UserDto.class);
     }
 
     public UserLoginDto findUser(String username, String password){

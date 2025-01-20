@@ -33,6 +33,11 @@ public class UsersController {
         return usersService.findUser(username, password);
     }
 
+    @GetMapping("user/{id}")
+    public UserDto findUserById(@PathVariable Long id) {
+        return usersService.findById(id);
+    }
+
 //    @GetMapping
 //    public List<Category> getAllProducts() {
 //        return usersService.findAll();

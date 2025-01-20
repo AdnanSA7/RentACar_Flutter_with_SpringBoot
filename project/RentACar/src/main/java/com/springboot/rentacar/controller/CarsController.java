@@ -1,7 +1,5 @@
 package com.springboot.rentacar.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.rentacar.dto.CarDto;
 import com.springboot.rentacar.dto.CarShowDto;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
