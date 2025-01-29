@@ -230,9 +230,9 @@ public class CarBookingService {
         Cars car = carsRepo.findById(requestDto.getCarId())
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
-        if (isCarAlreadyBooked(car, requestDto.getStartDate(), requestDto.getEndDate())) {
-            throw new RuntimeException("Car is not available for the selected dates.");
-        }
+//        if (isCarAlreadyBooked(car, requestDto.getStartDate(), requestDto.getEndDate())) {
+//            throw new RuntimeException("Car is not available for the selected dates.");
+//        }
 
         // Step 2: Fetch User and Driver
         Users user = usersRepo.findById(requestDto.getUserId())

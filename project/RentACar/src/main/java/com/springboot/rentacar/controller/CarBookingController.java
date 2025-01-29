@@ -69,6 +69,10 @@ public class CarBookingController {
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
 
         booking.setStatus(status);  // Set the status to 'Rented' or 'Pending' (ServiceAction enum)
+
+        if (status == ServiceAction.Rented){
+            booking.setDepositPaid(true);
+        }
         carBookingRepo.save(booking);  // Save the updated booking
 
         // Return the success message in JSON format

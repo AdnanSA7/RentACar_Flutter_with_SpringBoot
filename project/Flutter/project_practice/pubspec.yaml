@@ -41,6 +41,11 @@ dependencies:
   http:
   shared_preferences:
   multi_select_flutter:
+  intl:
+  fluttertoast:
+  pdf:
+  path_provider:
+  printing:
 
 dev_dependencies:
   flutter_test:

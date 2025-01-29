@@ -2,25 +2,23 @@ class CarBookingRequest {
   final int carId;
   final int userId;
   final String rentalType;
-  final DateTime startDate;
-  final DateTime endDate;
+  final String startDate;
+  final String? endDate;
   final String pickupLocation;
-  final String dropOffLocation;
+  final String? dropOffLocation;
   final int? hours;
-  final double? distance;
-  final List<int> additionalServiceIds;
+  final List<int>? additionalServiceIds;
 
   CarBookingRequest({
     required this.carId,
     required this.userId,
     required this.rentalType,
     required this.startDate,
-    required this.endDate,
+    this.endDate,
     required this.pickupLocation,
-    required this.dropOffLocation,
+    this.dropOffLocation,
     this.hours,
-    this.distance,
-    required this.additionalServiceIds,
+    this.additionalServiceIds,
   });
 
   Map<String, dynamic> toJson() {
@@ -28,12 +26,11 @@ class CarBookingRequest {
       'carId': carId,
       'userId': userId,
       'rentalType': rentalType,
-      'startDate': startDate.toIso8601String(),
-      'endDate': endDate.toIso8601String(),
+      'startDate': startDate,
+      'endDate': endDate,
       'pickupLocation': pickupLocation,
       'dropOffLocation': dropOffLocation,
       'hours': hours,
-      'distance': distance,
       'additionalServiceIds': additionalServiceIds,
     };
   }

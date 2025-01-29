@@ -38,21 +38,4 @@ public class UsersController {
         return usersService.findById(id);
     }
 
-//    @GetMapping
-//    public List<Category> getAllProducts() {
-//        return usersService.findAll();
-//    }
-//
-//    @PostMapping
-//    public Product addProduct(@RequestBody Product product) {
-//
-//        Category category = usersRepo.findById(product.getCategory().getId())
-//                .orElseThrow(() -> new RuntimeException("Category not found"));
-//
-////        Category category = productService.findByCategoryName(product.getCategory().getCategory_name());
-//
-//        product.setCategory(category);
-//
-//        return usersService.save(product);
-//    }
 }

@@ -4,11 +4,13 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Gradient gradient;
   final TextStyle? titleTextStyle;
+  final List<Widget>? actions;
 
   GradientAppBar({
     required this.title,
     required this.gradient,
     this.titleTextStyle,
+    this.actions
   });
 
   @override
@@ -24,6 +26,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         backgroundColor: Colors.transparent, // Make AppBar transparent
         elevation: 0, // Remove shadow
+        actions: actions,
       ),
     );
   }
